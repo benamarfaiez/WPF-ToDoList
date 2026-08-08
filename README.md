@@ -32,9 +32,3 @@ Depuis Visual Studio :
 
 ## Contribuer
 - Forker le dépôt, créer une branche dédiée, ouvrir une pull request.
-
-## Licence
-À préciser (ex. MIT).
-
-## Contact
-Pour questions ou améliorations : voir le dépôt GitHub.

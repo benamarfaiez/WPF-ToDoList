@@ -21,7 +21,7 @@ namespace WpfApp.ViewModels
 
         public ICommand AddTaskCommand { get; }
         public ICommand DeleteTaskCommand { get; }
-
+        public ICommand ToggleTaskCommand { get; }
         public MainViewModel()
         {
             _todoService = new TodoService();
@@ -30,6 +30,7 @@ namespace WpfApp.ViewModels
 
             AddTaskCommand = new RelayCommand(AddTask, CanAddTask);
             DeleteTaskCommand = new RelayCommand(DeleteTask);
+            ToggleTaskCommand = new RelayCommand(ToggleTask);
         }
 
         private bool CanAddTask() => !string.IsNullOrWhiteSpace(NewTaskTitle);
@@ -55,6 +56,11 @@ namespace WpfApp.ViewModels
         public void SaveTasks()
         {
             _todoService.Save(Tasks);
+        }
+        private void ToggleTask(object parameter)
+        {
+            // Dès qu'une case est cochée/décochée, on réenregistre le fichier JSON
+            SaveTasks();
         }
     }
 }

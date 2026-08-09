@@ -12,17 +12,17 @@ namespace WpfApp.Services
         public List<TodoItem> Load()
         {
             if (!File.Exists(_filePath))
-                return new List<TodoItem>();
+                return [];
 
             var info = new FileInfo(_filePath);
             if (info.Length == 0)
-                return new List<TodoItem>();
+                return [];
 
             var json = File.ReadAllText(_filePath);
             if (string.IsNullOrWhiteSpace(json))
-                return new List<TodoItem>();
+                return [];
 
-            return JsonSerializer.Deserialize<List<TodoItem>>(json) ?? new List<TodoItem>();
+            return JsonSerializer.Deserialize<List<TodoItem>>(json) ?? [];
         }
 
         public void Save(IEnumerable<TodoItem> items)

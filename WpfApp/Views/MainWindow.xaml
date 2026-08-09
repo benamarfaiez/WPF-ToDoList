@@ -23,9 +23,35 @@
             <!-- Mode de hauteur "*" :  La ligne occupe l'espace disponible non consommé par les lignes Auto ou fixes.-->
         </Grid.RowDefinitions>
 
-        <!-- Titre -->
-        <TextBlock Text="Ma Liste de Tâches" FontSize="24" FontWeight="Bold" Foreground="#2C3E50" Margin="0,0,0,15"/>
+        <Grid Grid.Row="0" Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
+            <!-- Titre -->
+            <TextBlock Text="Ma Liste de Tâches" FontSize="22" FontWeight="Bold" Foreground="#2C3E50" VerticalAlignment="Center"/>
+
+            <!-- Badges dynamique -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <!-- Badge "En cours" (Bleu) -->
+                <Border Background="#3498DB" CornerRadius="10" Padding="8,4" Margin="0,0,6,0">
+                    <TextBlock Foreground="White" FontSize="12" FontWeight="Bold">
+                <Run Text="{Binding PendingCount, Mode=OneWay}"/>
+                <Run Text=" en cours"/>
+                    </TextBlock>
+                </Border>
+
+                <!-- Badge "Terminées" (Vert) -->
+                <Border Background="#2ECC71" CornerRadius="10" Padding="8,4">
+                    <TextBlock Foreground="White" FontSize="12" FontWeight="Bold">
+                <Run Text="{Binding CompletedCount, Mode=OneWay}"/>
+                <Run Text=" faites"/>
+                    </TextBlock>
+                </Border>
+            </StackPanel>
+        </Grid>
+        
         <!-- Formulaire de Saisie -->
         <Grid Grid.Row="1" Margin="0,0,0,15">
             <Grid.ColumnDefinitions>

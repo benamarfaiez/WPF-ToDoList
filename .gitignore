@@ -57,3 +57,5 @@ TestResult.xml
 nunit-*.xml
 /.vs
 /packages
+/WpfApp/.vs
+/MigrationBackup/ee546910/WpfToDoList

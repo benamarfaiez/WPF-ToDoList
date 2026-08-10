@@ -23,6 +23,7 @@ namespace WpfApp
             services.AddSingleton<IMessenger>(WeakReferenceMessenger.Default);
 
             services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<ITodoService, TodoService>();
 
             // Singleton : ContactViewModel et TacheViewModel gardent leur état
             // (sélection, liste de tâches...) même après avoir changé d'écran.

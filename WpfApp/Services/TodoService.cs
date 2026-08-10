@@ -7,7 +7,8 @@ namespace WpfApp.Services
 {
     public class TodoService : ITodoService
     {
-        private readonly string _filePath = "todos.json";
+        private readonly string _filePath;
+        public TodoService(string filePath = "todos.json") => _filePath = filePath;
 
         public List<TodoItem> Load()
         {

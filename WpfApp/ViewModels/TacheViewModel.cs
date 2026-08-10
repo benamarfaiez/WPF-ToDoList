@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace WpfApp.ViewModels
     // IRecipient<ContactSelectionneMessage> déclare : "je sais réagir à ce message".
     public partial class TacheViewModel : ObservableObject, IRecipient<ContactSelectionneMessage>
     {
-        private readonly TodoService _todoService;
+        private readonly ITodoService _todoService;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(AddTaskCommand))]
@@ -91,12 +92,13 @@ namespace WpfApp.ViewModels
             ? "Aucun contact sélectionné dans l'onglet Contacts — les nouvelles tâches ne seront assignées à personne."
             : $"Contact sélectionné : {ContactFiltre.NomComplet}— les nouvelles tâches lui seront assignées.";
 
-        public TacheViewModel(IMessenger messenger)
+        public TacheViewModel(IMessenger messenger, ITodoService todoService)
         {
-            _todoService = new TodoService();
-            var loadedTasks = _todoService.Load() ?? new List<TodoItem>();
+            _todoService = todoService;
+            var loadedTasks = _todoService.Load() ?? Enumerable.Empty<TodoItem>();
             Taches = new ObservableCollection<TodoItem>(loadedTasks);
             // Écoute des ajouts/suppressions dans la collection
+
             Taches.CollectionChanged += OnTachesCollectionChanged;
 
             // Abonnement initial à chaque tâche existante
@@ -109,7 +111,18 @@ namespace WpfApp.ViewModels
             messenger.RegisterAll(this);
 
             // Interroge activement l'état ACTUEL au moment de la création de ce ViewModel
-            ContactFiltre = messenger.Send<ContactSelectionneRequestMessage>();
+            // Envoyer une requête peut échouer si aucun récepteur n'est enregistré. On protège l'accès.
+            try
+            {
+                var request = new ContactSelectionneRequestMessage();
+                messenger.Send(request);
+                // La propriété Response lance une InvalidOperationException si personne n'a répondu.
+                ContactFiltre = request.Response;
+            }
+            catch (InvalidOperationException)
+            {
+                ContactFiltre = null;
+            }
         }
 
         // Appelé automatiquement par le Messenger quand ContactViewModel envoie

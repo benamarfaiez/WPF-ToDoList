@@ -8,8 +8,5 @@
     <Compile Update="Views\TacheView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Window1.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
 </Project>

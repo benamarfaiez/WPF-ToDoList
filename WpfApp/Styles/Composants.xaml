@@ -71,7 +71,7 @@
                 </Grid.ColumnDefinitions>
 
                 <CheckBox IsChecked="{Binding IsCompleted, Mode=TwoWay}"
-                                  Command="{Binding DataContext.ToggleTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                  Command="{Binding DataContext.ToggleTaskCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                   CommandParameter="{Binding}"
                           VerticalAlignment="Center" Margin="0,0,10,0"/>
 
@@ -90,7 +90,7 @@
 
                 <!-- Bouton Supprimer lié au ViewModel via RelativeSource -->
                 <Button Grid.Column="2" Content="✕"
-                        Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                        Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                         CommandParameter="{Binding}"
                         Background="Transparent" BorderThickness="0"
                         Foreground="#E74C3C" FontWeight="Bold" FontSize="14" Cursor="Hand" Padding="5,0"/>

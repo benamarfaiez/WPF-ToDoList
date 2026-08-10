@@ -73,7 +73,7 @@
             </Grid>
             
             <!-- Liste des Tâches -->
-            <ListBox x:Name="ListeTaches" Grid.Row="3" ItemsSource="{Binding Tasks}"
+        <ListBox x:Name="ListeTaches" Grid.Row="3" ItemsSource="{Binding Taches}"
                  ItemContainerStyle="{StaticResource CardListBoxItemStyle}"
                  ItemTemplate="{StaticResource TodoItemTemplate}"
                  HorizontalContentAlignment="Stretch">

@@ -23,5 +23,8 @@ namespace WpfApp.Models
 
         [DataMember]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        [DataMember]
+        public string ContactAssigned { get; set; }
     }
 }

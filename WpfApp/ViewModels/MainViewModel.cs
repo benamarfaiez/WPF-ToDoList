@@ -22,5 +22,8 @@ namespace WpfApp.ViewModels
 
         [RelayCommand]
         private void AllerAuxTaches() => Navigation.NavigateTo<TacheViewModel>();
+
+        [RelayCommand]
+        private void AllerAuxTParametres() => Navigation.NavigateTo<SettingsViewModel>();
     }
 }

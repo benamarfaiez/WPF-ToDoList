@@ -15,6 +15,9 @@
         <DataTemplate DataType="{x:Type vm:TacheViewModel}">
             <views:TacheView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+            <views:SettingsView/>
+        </DataTemplate>
     </Window.Resources>
 
     <DockPanel>
@@ -22,6 +25,8 @@
             <Button Content="Contacts" Command="{Binding AllerAuxContactsCommand}"
                     Padding="14,10" Background="Transparent" Foreground="White" BorderThickness="0"/>
             <Button Content="Tâches" Command="{Binding AllerAuxTachesCommand}"
+                    Padding="14,10" Background="Transparent" Foreground="White" BorderThickness="0"/>
+            <Button Content="Paramètres" Command="{Binding AllerAuxTParametresCommand}"
                     Padding="14,10" Background="Transparent" Foreground="White" BorderThickness="0"/>
         </StackPanel>
 

@@ -14,7 +14,7 @@ using WpfApp.Services;
 namespace WpfApp.ViewModels
 {
     // IRecipient<ContactSelectionneMessage> déclare : "je sais réagir à ce message".
-    public partial class TacheViewModel : ObservableObject, IRecipient<ContactSelectionneMessage>
+    public partial class TacheViewModel : ObservableObject, IRecipient<ContactSelectionneMessage>, IRecipient<DonneesReinitialiseesMessage>
     {
         private readonly ITodoService _todoService;
 
@@ -131,6 +131,11 @@ namespace WpfApp.ViewModels
         public void Receive(ContactSelectionneMessage message)
         {
             ContactFiltre = message.Value;
+        }
+
+        public void Receive(DonneesReinitialiseesMessage message)
+        {
+            Taches.Clear();
         }
     }
 }

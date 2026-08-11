@@ -30,6 +30,7 @@ namespace WpfApp
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<ContactViewModel>();
             services.AddSingleton<TacheViewModel>();
+            services.AddSingleton<SettingsViewModel>();
 
             services.AddSingleton<MainWindow>();
 

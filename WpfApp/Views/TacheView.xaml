@@ -22,8 +22,8 @@
                 <!-- Titre -->
                 <DockPanel x:Name="Titre" LastChildFill="True" Margin="0,0,10,0">
                     <Grid DockPanel.Dock="Top">
-                        <Border Background="LightGray">
-                            <TextBlock Text="Ma Liste de Tâches" FontSize="20" FontWeight="Bold" Foreground="#2C3E50" 
+                            <Border Background="{DynamicResource FondSecondaireBrush}">
+                            <TextBlock Text="Ma Liste de Tâches" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource TexteBrush}"
                                HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                     </Grid>
@@ -32,16 +32,16 @@
                 <!-- Badges dynamique -->
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                     <!-- Badge "En cours" (Bleu) -->
-                    <Border Background="#FF676968" CornerRadius="5" Padding="8,4" Margin="0,0,6,0">
-                        <TextBlock Foreground="White" FontSize="12" FontWeight="Bold">
+                    <Border Background="{DynamicResource FondSecondaireBrush}" CornerRadius="5" Padding="8,4" Margin="0,0,6,0">
+                        <TextBlock Foreground="{DynamicResource TexteBrush}" FontSize="12" FontWeight="Bold">
                             <Run Text="{Binding PendingCount, Mode=OneWay}"/>
                             <Run Text=" en cours"/>
                         </TextBlock>
                     </Border>
 
                     <!-- Badge "Terminées" (Vert) -->
-                    <Border Background="#FF676968" CornerRadius="5" Padding="8,4">
-                        <TextBlock Foreground="White" FontSize="12" FontWeight="Bold">
+                    <Border Background="{DynamicResource FondSecondaireBrush}" CornerRadius="5" Padding="8,4">
+                        <TextBlock Foreground="{DynamicResource TexteBrush}" FontSize="12" FontWeight="Bold">
                             <Run Text="{Binding CompletedCount, Mode=OneWay}"/>
                             <Run Text=" faites"/>
                         </TextBlock>
@@ -57,8 +57,8 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBox Grid.Row="1" Grid.Column="0" Style="{StaticResource RoundedTextBoxStyle}"
-                         Text="{Binding NewTaskTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                </TextBox>
+                         Text="{Binding NewTaskTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="{DynamicResource TexteBrush}" Background="{DynamicResource TextBoxBackgroundBrush}"/>
 
                 <Button Grid.Column="1" Content="Ajouter" Command="{Binding AddTaskCommand}"
                     Margin="10,0,0,0" Padding="15,8" FontSize="14" FontWeight="SemiBold"
@@ -67,8 +67,8 @@
             </Grid>
 
             <Grid Grid.Row="2">
-                <Border DockPanel.Dock="Top" Background="#EAF2FC" CornerRadius="6" Padding="10" Margin="0,0,0,12">
-                    <TextBlock Text="{Binding TexteContactFiltre}" TextWrapping="Wrap"/>
+                <Border DockPanel.Dock="Top" Background="{DynamicResource FondSecondaireBrush}" CornerRadius="6" Padding="10" Margin="0,0,0,12">
+                    <TextBlock Text="{Binding TexteContactFiltre}" TextWrapping="Wrap" Foreground="{DynamicResource TexteBrush}"/>
                 </Border>
             </Grid>
             
@@ -76,7 +76,8 @@
         <ListBox x:Name="ListeTaches" Grid.Row="3" ItemsSource="{Binding Taches}"
                  ItemContainerStyle="{StaticResource CardListBoxItemStyle}"
                  ItemTemplate="{StaticResource TodoItemTemplate}"
-                 HorizontalContentAlignment="Stretch">
+                 HorizontalContentAlignment="Stretch"
+                 Background="{DynamicResource FondPrincipalBrush}" BorderBrush="{DynamicResource TextBoxBorderBrush}" Foreground="{DynamicResource TexteBrush}">
             </ListBox>
         </Grid>
 

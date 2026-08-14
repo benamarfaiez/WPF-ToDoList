@@ -7,23 +7,22 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel Margin="20">
-        <TextBlock DockPanel.Dock="Top" Text="Paramètres" FontSize="20" FontWeight="Bold" Margin="0,0,0,16"/>
+        <TextBlock DockPanel.Dock="Top" Text="Paramètres" FontSize="20" FontWeight="Bold" Margin="0,0,0,16" Foreground="{DynamicResource TexteBrush}"/>
 
         <StackPanel DockPanel.Dock="Top">
 
-            <TextBlock Text="Apparence" FontWeight="Bold" Margin="0,0,0,6"/>
-            <CheckBox Content="Mode sombre" IsChecked="{Binding ModeSombre}" Margin="0,0,0,16"/>
+            <TextBlock Text="Apparence" FontWeight="Bold" Margin="0,0,0,6" Foreground="{DynamicResource TexteBrush}"/>
+            <CheckBox Content="Mode sombre" IsChecked="{Binding ModeSombre}" Margin="0,0,0,12" Foreground="{DynamicResource TexteBrush}"/>
 
-            <TextBlock Text="Comportement" FontWeight="Bold" Margin="0,0,0,6"/>
-            <CheckBox Content="Activer les notifications" IsChecked="{Binding NotificationsActivees}" Margin="0,0,0,16"/>
-
-            <TextBlock Text="Données" FontWeight="Bold" Margin="0,0,0,6"/>
-            <Border Background="#EAF2FC" CornerRadius="6" Padding="10" Margin="0,0,0,10">
+            <TextBlock Text="Données" FontWeight="Bold" Margin="0,0,0,6" Foreground="{DynamicResource TexteBrush}"/>
+            <Border Background="{DynamicResource FondSecondaireBrush}" CornerRadius="6" Padding="10" Margin="0,0,0,10">
                 <TextBlock Text="{Binding CheminFichierDonnees, StringFormat='Fichier de données : {0}'}"
-                           TextWrapping="Wrap"/>
+                           TextWrapping="Wrap" Foreground="{DynamicResource TexteBrush}"/>
             </Border>
             <Button Content="Réinitialiser toutes les tâches" Command="{Binding ReinitialiserDonneesCommand}"
-                    HorizontalAlignment="Left" Padding="10,4" Background="#FDECEA" Foreground="#C0392B" BorderThickness="0"/>
+                    HorizontalAlignment="Left" Padding="10,4" BorderThickness="0"
+                    Style="{StaticResource RoundedButtonStyle}"
+                    Background="{DynamicResource DeleteBrush}" Foreground="{DynamicResource HeaderTextBrush}"/>
 
         </StackPanel>
     </DockPanel>

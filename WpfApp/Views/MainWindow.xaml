@@ -4,7 +4,7 @@
         xmlns:vm="clr-namespace:WpfApp.ViewModels"
         xmlns:views="clr-namespace:WpfApp.Views"
         Title="Gestionnaire de Tâches" Height="450" Width="800"
-        WindowStartupLocation="CenterScreen" Background="#F4F6F8">
+        WindowStartupLocation="CenterScreen" Background="{DynamicResource FondPrincipalBrush}">
 
     <!-- Mapping implicite ViewModel -> View : dès que Navigation.CurrentViewModel
          change de TYPE, WPF choisit automatiquement le bon DataTemplate ci-dessous. -->
@@ -21,13 +21,13 @@
     </Window.Resources>
 
     <DockPanel>
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#1B2A4A">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="{DynamicResource HeaderBackgroundBrush}">
             <Button Content="Contacts" Command="{Binding AllerAuxContactsCommand}"
-                    Padding="14,10" Background="Transparent" Foreground="White" BorderThickness="0"/>
+                    Padding="14,10" Background="Transparent" Foreground="{DynamicResource HeaderTextBrush}" BorderThickness="0"/>
             <Button Content="Tâches" Command="{Binding AllerAuxTachesCommand}"
-                    Padding="14,10" Background="Transparent" Foreground="White" BorderThickness="0"/>
+                    Padding="14,10" Background="Transparent" Foreground="{DynamicResource HeaderTextBrush}" BorderThickness="0"/>
             <Button Content="Paramètres" Command="{Binding AllerAuxTParametresCommand}"
-                    Padding="14,10" Background="Transparent" Foreground="White" BorderThickness="0"/>
+                    Padding="14,10" Background="Transparent" Foreground="{DynamicResource HeaderTextBrush}" BorderThickness="0"/>
         </StackPanel>
 
         <!-- Le shell ne sait pas CE QU'IL affiche, seulement QUOI (le ViewModel courant). -->

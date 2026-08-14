@@ -12,19 +12,18 @@ namespace WpfApp.ViewModels
     {
         private readonly ITodoService _todoService;
         private readonly IMessenger _messenger;
+        private readonly IThemeService _themeService;
 
         [ObservableProperty]
         private bool modeSombre;
 
-        [ObservableProperty]
-        private bool notificationsActivees = true;
-
         public string CheminFichierDonnees => _todoService.FilePath;
 
-        public SettingsViewModel(ITodoService todoService, IMessenger messenger)
+        public SettingsViewModel(ITodoService todoService, IMessenger messenger, IThemeService themeService)
         {
             _todoService = todoService;
             _messenger = messenger;
+            _themeService = themeService;
         }
 
         [RelayCommand]
@@ -33,5 +32,11 @@ namespace WpfApp.ViewModels
             _messenger.Send(new DonneesReinitialiseesMessage());
             _todoService.Save(new List<TodoItem>());
         }
+
+        partial void OnModeSombreChanged(bool value)
+        {
+            _themeService.AppliquerTheme(value);
+        }
+
     }
 }

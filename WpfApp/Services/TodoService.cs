@@ -7,19 +7,19 @@ namespace WpfApp.Services
 {
     public class TodoService : ITodoService
     {
-        private readonly string _filePath;
-        public TodoService(string filePath = "todos.json") => _filePath = filePath;
+        public string FilePath { get; }
+        public TodoService(string filePath = "C:\\Users\\fbenamar\\Documents\\todos.json") => FilePath = filePath;
 
         public List<TodoItem> Load()
         {
-            if (!File.Exists(_filePath))
+            if (!File.Exists(FilePath))
                 return [];
 
-            var info = new FileInfo(_filePath);
+            var info = new FileInfo(FilePath);
             if (info.Length == 0)
                 return [];
 
-            var json = File.ReadAllText(_filePath);
+            var json = File.ReadAllText(FilePath);
             if (string.IsNullOrWhiteSpace(json))
                 return [];
 
@@ -29,7 +29,7 @@ namespace WpfApp.Services
         public void Save(IEnumerable<TodoItem> items)
         {
             var options = new JsonSerializerOptions { WriteIndented = true };
-            using var stream = File.Create(_filePath);
+            using var stream = File.Create(FilePath);
             JsonSerializer.Serialize(stream, new List<TodoItem>(items), options);
         }
     }

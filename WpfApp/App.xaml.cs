@@ -24,12 +24,14 @@ namespace WpfApp
 
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<ITodoService, TodoService>();
+            services.AddSingleton<IThemeService, ThemeService>();
 
             // Singleton : ContactViewModel et TacheViewModel gardent leur état
             // (sélection, liste de tâches...) même après avoir changé d'écran.
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<ContactViewModel>();
             services.AddSingleton<TacheViewModel>();
+            services.AddSingleton<SettingsViewModel>();
 
             services.AddSingleton<MainWindow>();
 

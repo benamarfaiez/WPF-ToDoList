@@ -3,7 +3,7 @@
     
     <Style x:Key="RoundedButtonStyle" TargetType="Button">
         <Setter Property="Background" Value="#2ECC71"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Foreground" Value="{DynamicResource HeaderTextBrush}"/>
         <Setter Property="Padding" Value="10,5"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -21,8 +21,9 @@
     <Style x:Key="RoundedTextBoxStyle" TargetType="TextBox">
         <Setter Property="Padding" Value="8,6"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Background" Value="White"/>
-        <Setter Property="BorderBrush" Value="#CCCCCC"/>
+        <Setter Property="Background" Value="{DynamicResource TextBoxBackgroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TexteBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -48,7 +49,7 @@
     <Style x:Key="CardListBoxItemStyle" TargetType="ListBoxItem">
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0,0,0,8"/>
-        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
@@ -59,7 +60,7 @@
     </Style>
 
     <DataTemplate x:Key="TodoItemTemplate">
-        <Border Background="White" CornerRadius="6" Padding="12" Margin="0,2">
+        <Border Background="{DynamicResource CardBackgroundBrush}" CornerRadius="6" Padding="12" Margin="0,2">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="4" ShadowDepth="1" Opacity="0.08" Color="Black"/>
             </Border.Effect>
@@ -75,13 +76,13 @@
                                   CommandParameter="{Binding}"
                           VerticalAlignment="Center" Margin="0,0,10,0"/>
 
-                <TextBlock Grid.Column="1" Text="{Binding Title}" FontSize="14" VerticalAlignment="Center" Foreground="#34495E">
+                <TextBlock Grid.Column="1" Text="{Binding Title}" FontSize="14" VerticalAlignment="Center" Foreground="{DynamicResource TexteBrush}">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="True">
                                     <Setter Property="TextDecorations" Value="Strikethrough"/>
-                                    <Setter Property="Foreground" Value="#BDC3C7"/>
+                                    <Setter Property="Foreground" Value="{DynamicResource TexteAttenueBrush}"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -93,7 +94,7 @@
                         Command="{Binding DataContext.DeleteTaskCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                         CommandParameter="{Binding}"
                         Background="Transparent" BorderThickness="0"
-                        Foreground="#E74C3C" FontWeight="Bold" FontSize="14" Cursor="Hand" Padding="5,0"/>
+                        Foreground="{DynamicResource DeleteBrush}" FontWeight="Bold" FontSize="14" Cursor="Hand" Padding="5,0"/>
             </Grid>
         </Border>
     </DataTemplate>

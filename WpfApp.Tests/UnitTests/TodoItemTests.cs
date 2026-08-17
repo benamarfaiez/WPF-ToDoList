@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using FluentAssertions;
 using WpfApp.Models;
 using Xunit;
@@ -8,18 +7,17 @@ namespace WpfApp.Tests.UnitTests
     public class TodoItemTests
     {
         [Fact]
-        public void Changing_IsCompleted_raises_PropertyChanged()
+        public void IsCompleted_ShouldRaisePropertyChanged_WhenValueChanged()
         {
-            var item = new TodoItem { Title = "t" };
-            bool raised = false;
-            item.PropertyChanged += (s, e) =>
-            {
-                if (e.PropertyName == nameof(TodoItem.IsCompleted)) raised = true;
-            };
+            // Arrange
+            var item = new TodoItem { Title = "Tâche de test" };
+            using var monitoredItem = item.Monitor();
 
+            // Act
             item.IsCompleted = !item.IsCompleted;
 
-            raised.Should().BeTrue();
+            // Assert
+            monitoredItem.Should().RaisePropertyChangeFor(x => x.IsCompleted);
         }
     }
 }

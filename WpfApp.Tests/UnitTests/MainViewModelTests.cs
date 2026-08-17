@@ -1,4 +1,3 @@
-using FluentAssertions;
 using Moq;
 using WpfApp.Services;
 using WpfApp.ViewModels;
@@ -8,21 +7,33 @@ namespace WpfApp.Tests.UnitTests
 {
     public class MainViewModelTests
     {
-        [Fact]
-        public void Constructor_navigates_to_contact_viewmodel()
+        private readonly Mock<INavigationService> _navigationServiceMock = new();
+        private MainViewModel CreateViewModel()
         {
-            var nav = new Mock<INavigationService>();
-            var vm = new MainViewModel(nav.Object);
-            nav.Verify(n => n.NavigateTo<ContactViewModel>(), Times.Once);
+            return new MainViewModel(
+                _navigationServiceMock.Object
+            );
         }
-
         [Fact]
-        public void AllerAuxTaches_command_calls_navigation()
+        public void Constructor_ShouldNavigateToContactViewModel_WhenInitialized()
         {
-            var nav = new Mock<INavigationService>();
-            var vm = new MainViewModel(nav.Object);
+            // Act
+            _ = CreateViewModel();
+
+            // Assert
+            _navigationServiceMock.Verify(n => n.NavigateTo<ContactViewModel>(), Times.Once);
+        }
+        [Fact]
+        public void AllerAuxTachesCommand_ShouldNavigateToTacheViewModel_WhenExecuted()
+        {
+            // Arrange
+            var vm = CreateViewModel();
+
+            // Act
             vm.AllerAuxTachesCommand.Execute(null);
-            nav.Verify(n => n.NavigateTo<TacheViewModel>(), Times.AtLeastOnce);
+
+            // Assert
+            _navigationServiceMock.Verify(n => n.NavigateTo<TacheViewModel>(), Times.Once);
         }
     }
 }

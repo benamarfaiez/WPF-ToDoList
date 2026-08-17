@@ -11,36 +11,50 @@ namespace WpfApp.Tests.UnitTests
 {
     public class TacheViewModelTests
     {
-        [Fact]
-        public void AddTask_should_add_item_and_save()
+        private readonly Mock<ITodoService> _todoServiceMock = new();
+        private readonly Mock<IMessenger> _messengerMock = new();
+
+        public TacheViewModelTests()
         {
-            var todoMock = new Mock<ITodoService>();
-            todoMock.Setup(t => t.Load()).Returns(new List<TodoItem>());
-            var messenger = new WeakReferenceMessenger();
-            var vm = new TacheViewModel(messenger, todoMock.Object);
-
-            vm.NewTaskTitle = "Nouvelle tâche";
-            vm.AddTaskCommand.Execute(null);
-
-            vm.Taches.Should().ContainSingle(t => t.Title == "Nouvelle tâche");
-            todoMock.Verify(t => t.Save(It.IsAny<IEnumerable<TodoItem>>()), Times.AtLeastOnce);
+            _todoServiceMock.Setup(t => t.Load()).Returns([]);
+        }
+        private TacheViewModel CreateViewModel()
+        {
+            return new TacheViewModel(
+                _messengerMock.Object,
+                _todoServiceMock.Object
+            );
         }
 
         [Fact]
-        public void DeleteTask_should_remove_item_and_save()
+        public void AddTaskCommand_ShouldAddItemAndSave_WhenTitleIsProvided()
         {
-            var todoMock = new Mock<ITodoService>();
-            todoMock.Setup(t => t.Load()).Returns(new List<TodoItem>());
-            var messenger = new WeakReferenceMessenger();
-            var vm = new TacheViewModel(messenger, todoMock.Object);
+            // Arrange
+            var vm = CreateViewModel();
+            vm.NewTaskTitle = "Nouvelle tâche";
 
-            var item = new TodoItem { Title = "To delete" };
-            vm.Taches.Add(item);
+            // Act
+            vm.AddTaskCommand.Execute(null);
 
-            vm.DeleteTaskCommand.Execute(item);
+            // Assert
+            vm.Taches.Should().ContainSingle(t => t.Title == "Nouvelle tâche");
+            _todoServiceMock.Verify(t => t.Save(It.IsAny<IEnumerable<TodoItem>>()), Times.Once);
+        }
 
-            vm.Taches.Should().NotContain(item);
-            todoMock.Verify(t => t.Save(It.IsAny<IEnumerable<TodoItem>>()), Times.AtLeastOnce);
+        [Fact]
+        public void DeleteTaskCommand_ShouldRemoveItemAndSave_WhenItemExists()
+        {
+            // Arrange
+            var vm = CreateViewModel();
+            var itemToDelete = new TodoItem { Title = "To delete" };
+            vm.Taches.Add(itemToDelete);
+
+            // Act
+            vm.DeleteTaskCommand.Execute(itemToDelete);
+
+            // Assert
+            vm.Taches.Should().NotContain(itemToDelete);
+            _todoServiceMock.Verify(t => t.Save(It.IsAny<IEnumerable<TodoItem>>()), Times.Once);
         }
     }
 }
